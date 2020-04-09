@@ -23,11 +23,38 @@ def solution(road, n):
     print(longest)
     print(check)
     return 
+    
+def solution(road, n):
+    broken = []
+    for i in range(len(road)):
+        if road[i] == "0":
+            broken.append(i)
+    print(broken)
+    left = 0
+    right = 0
+    cur = 0
+    ans = 0
+    fix = 0
+    while right <= len(road)-1:
+        if road[right] == "1":
+            cur += 1
+            right += 1
+        elif road[right] == "0" and fix < n:
+            fix += 1
+            cur += 1
+            right += 1
+        elif road[right] == "0" and fix >= n:
+            if left in broken:
+                fix -= 1
+            ans = max(ans, cur)
+            left += 1
+            cur -= 1
+    print(ans)
 
-# road = "111011110011111011111100011111"	
+road = "111011110011111011111100011111"	
 # road = "001100"
-road = "101010110001111"
-# n = 3
+# road = "101010110001111"
+n = 3
 # n = 5
-n = 2
+# n = 2
 solution(road, n)
